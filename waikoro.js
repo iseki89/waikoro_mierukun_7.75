@@ -57,7 +57,7 @@ javascript:(function(){
 	const bv = box2.innerHTML.match(/BET額\d+/g);
 	if(bv) {
 		for(i=0;i<chars.length;i++){
-			const v = bv[i].replace("BET額","");
+			let v = bv[i].replace("BET額","");
 			v = parseInt(v);
 			if(!isNaN(v)){
 				bet_values.push(v);
@@ -538,7 +538,7 @@ javascript:(function(){
 							let alone = 1;
 							if(char_bet[j]==1) alone = 1.2;
 							const ur = users[buttons[i].innerHTML][j] * (Math.floor(Math.floor(sum/char_bet[j])*ratio*alone) + Math.floor(pot/char_bet[j]));
-							if(user_sum[buttons[i].innerHTML] <= ur) ok = true;
+							if(user_sum[buttons[i].innerHTML] <= ur) ok = true; //okがtrueになってもwinがtrueになるわけじゃない。一度でもwinがfalseになったら戻らない
 						}
 					}
 
