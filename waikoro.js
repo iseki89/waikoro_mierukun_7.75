@@ -554,6 +554,8 @@ javascript:(function(){
 				if(ratio==4) limit_bet = 180;
 				if(users[buttons[i].innerHTML][j]==user_bet[buttons[i].innerHTML] && user_sum[buttons[i].innerHTML]>=limit_bet){
 					button_state[i]["orange"] = 1;
+				}else{
+					button_state[i]["orange"] = 0;
 				}
 			}
 			if(isDie){
