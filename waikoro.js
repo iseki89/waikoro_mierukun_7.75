@@ -554,8 +554,6 @@ javascript:(function(){
 				if(ratio==4) limit_bet = 180;
 				if(users[buttons[i].innerHTML][j]==user_bet[buttons[i].innerHTML] && user_sum[buttons[i].innerHTML]>=limit_bet){
 					button_state[i]["orange"] = 1;
-				}else{
-					button_state[i]["orange"] = 0;
 				}
 			}
 			if(isDie){
@@ -573,6 +571,7 @@ javascript:(function(){
 		for(i=0;i<button_state.length;i++){
 			buttons[i].style.backgroundColor = "#C3C3C3";
 			buttons[i].style.boxShadow = "none";
+			buttons[i].style.backgroundImage = 'none';
 
 			if(button_state[i]["light"]==1){
 				buttons[i].style.backgroundColor = "#7affff";
