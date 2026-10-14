@@ -8,6 +8,7 @@ javascript:(function(){
 	const button_state = [];
 	const user_sum = {};
 	const user_bet = {};
+	const bet_values = [];
 	let sum = 0;
 	let bets = 0;
 	let test_bet = 0;
@@ -52,8 +53,17 @@ javascript:(function(){
 		}
 	}
 
-
-	
+	const box2 = p_box.nextElementSibling.nextElementSibling;
+	const bv = box2.innerHTML.match(/BET額\d+/g);
+	if(bv) {
+		for(i=0;i<chars.length;i++){
+			const v = bv[i].replace("BET額","");
+			v = parseInt(v);
+			if(!isNaN(v)){
+				bet_values.push(v);
+			}
+		}
+	}
 
 	for(i=0;i<chars.length;i++){
 		const disp = document.createElement("p");
@@ -95,6 +105,9 @@ javascript:(function(){
 		test_bet_p.addEventListener("click", () => {
 			const tb = document.createElement("font");
 			let bet_value = 300;
+			if(bet_values.length){
+				bet_value = bet_values[index];
+			}
 			if(ratio==2) bet_value = 1000;
 			if(ratio==4) bet_value = 30;
 			tb.innerHTML = "お試し " + bet_value + "枚<br>";
@@ -522,7 +535,8 @@ javascript:(function(){
 					let ok = false;
 					for(k=0;k<char_bet_user[j].length;k++){
 						if(char_bet_user[j][k]==buttons[i].innerHTML){
-							ok = true;
+							const ur = users[buttons[i].innerHTML][j] * (Math.floor(Math.floor(sum/char_bet[j])*ratio*alone) + Math.floor(pot/char_bet[j]));
+							if(user_sum[buttons[i].innerHTML] <= ur) ok = true;
 						}
 					}
 
@@ -590,12 +604,17 @@ javascript:(function(){
 		let tb_num = 0;
 		if(users["お試し"]!=undefined){
 			test_bet = 0;
+			let index = 0;
 			users["お試し"].forEach((tb) => {
 				let bet_value = 300;
+				if(bet_values.length){
+					bet_value = bet_values[index];
+				}
 				if(ratio==2) bet_value = 1000;
 				if(ratio==4) bet_value = 30;
 				test_bet += tb*bet_value;
 				tb_num += tb;
+				index++;
 			});
 		}
 
