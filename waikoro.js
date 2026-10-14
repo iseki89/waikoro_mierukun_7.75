@@ -535,6 +535,8 @@ javascript:(function(){
 					let ok = false;
 					for(k=0;k<char_bet_user[j].length;k++){
 						if(char_bet_user[j][k]==buttons[i].innerHTML){
+							let alone = 1;
+							if(char_bet[j]==1) alone = 1.2;
 							const ur = users[buttons[i].innerHTML][j] * (Math.floor(Math.floor(sum/char_bet[j])*ratio*alone) + Math.floor(pot/char_bet[j]));
 							if(user_sum[buttons[i].innerHTML] <= ur) ok = true;
 						}
